@@ -1,6 +1,6 @@
 import os
 from app import app, db, login_manager
-from flask import render_template, request, redirect, url_for, flash, session, abort
+from flask import render_template, request, redirect, url_for, flash, session, abort, send_from_directory
 from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.utils import secure_filename
 from werkzeug.security import check_password_hash
@@ -35,7 +35,7 @@ def upload():
         photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
         flash('File Saved', 'success')
-        return redirect(url_for('upload'))
+        return redirect(url_for('files'))
 
     return render_template('upload.html', form=form)
 
@@ -64,7 +64,7 @@ def login():
 # the user ID stored in the session
 @login_manager.user_loader
 def load_user(id):
-    return db.session.execute(db.select(UserProfile).filter_by(id=id)).scalar()
+    return db.session.execute(db.select(UserProfile).filter_by(id=int(id))).scalar()
 
 
 ###
@@ -86,6 +86,38 @@ def send_text_file(file_name):
     """Send your static text file."""
     file_dot_text = file_name + '.txt'
     return app.send_static_file(file_dot_text)
+
+
+def get_uploaded_images():
+    folder = os.path.join(os.getcwd(), app.config['UPLOAD_FOLDER'])
+    images = []
+
+    for file in os.listdir(folder):
+        filepath = os.path.join(folder, file)
+        if os.path.isfile(filepath):
+            images.append((file, os.path.getmtime(filepath)))
+
+    # sort by newest first
+    images.sort(key=lambda x: x[1], reverse=True)
+
+    # return just filenames
+    return [image[0] for image in images]
+
+
+@app.route('/uploads/<filename>')
+@login_required
+def get_image(filename):
+    return send_from_directory(
+        os.path.join(os.getcwd(), app.config['UPLOAD_FOLDER']),
+        filename
+    )
+
+
+@app.route('/files')
+@login_required
+def files():
+    images = get_uploaded_images()
+    return render_template('files.html', images=images)
 
 
 @app.after_request
