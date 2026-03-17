@@ -1,8 +1,48 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block main %}
-<h1 class="page-header">INFO3180 Lab 4</h1>
-{% include 'flash_messages.html' %}
+<section class="naruto-home-hero">
+    <div class="naruto-home-overlay"></div>
+    <div class="naruto-home-content">
+        <p class="konoha-badge">Hidden Leaf Archive</p>
+        <h1 class="naruto-home-title">
+            Unleash Your
+            <span>Shinobi Gallery</span>
+        </h1>
+        <p class="naruto-home-text">
+            Step into a chakra-powered image vault inspired by Naruto. Upload,
+            explore, and showcase your visuals in a cinematic anime-style experience.
+        </p>
 
-<p class="lead">This Flask app demonstrates basic file uploads and basic authentication.</p>
+        <div class="naruto-home-actions">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('upload') }}" class="btn naruto-btn naruto-btn-primary">Upload Image</a>
+                <a href="{{ url_for('files') }}" class="btn naruto-btn naruto-btn-secondary">View Gallery</a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="btn naruto-btn naruto-btn-primary">Enter the Village</a>
+                <a href="{{ url_for('about') }}" class="btn naruto-btn naruto-btn-secondary">Learn More</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<section class="naruto-feature-section">
+    <div class="feature-card">
+        <div class="feature-icon">🔥</div>
+        <h3>Chakra Uploads</h3>
+        <p>Securely upload your best images into a glowing anime-inspired gallery.</p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Dynamic Hover Effects</h3>
+        <p>Images react with energy, motion, and dramatic reveal effects on hover.</p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon">🌀</div>
+        <h3>Immersive Style</h3>
+        <p>A Naruto-themed interface with aura lighting, particles, and cinematic depth.</p>
+    </div>
+</section>
 {% endblock %}

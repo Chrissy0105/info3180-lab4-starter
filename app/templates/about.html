@@ -1,6 +1,71 @@
 {% extends "base.html" %}
 
 {% block main %}
-<h1 class="page-header">About</h1>
-<p>This webpage is about {{ name }}.</p>
+<section class="anime-hero reveal-up">
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+        <h1 class="anime-title">About Me</h1>
+        <p class="anime-subtitle">
+            Meet the anime-loving tech creator behind Konoha Gallery.
+        </p>
+    </div>
+</section>
+
+<section class="about-container reveal-up">
+    <div class="about-card about-glow-card">
+
+        <div class="about-avatar-wrap">
+            <div class="about-avatar-ring"></div>
+            <div class="about-avatar">
+                <span class="avatar-kanji">忍</span>
+            </div>
+        </div>
+
+        <h2 class="about-name">Christina Blye</h2>
+
+        <p class="about-text">
+            Hi! I'm <strong>Christina Blye</strong>, an anime lover, reader, and tech enthusiast
+            who enjoys blending creativity with technology to build cool digital experiences.
+        </p>
+
+        <p class="about-text">
+            My favorite anime is <strong>One Piece</strong>, followed by <strong>Demon Slayer</strong>.
+            I love powerful storytelling, unforgettable characters, emotional moments, and epic fights.
+        </p>
+
+        <p class="about-text">
+            In my spare time, I enjoy reading, watching anime, and doing technological stuff like
+            coding, designing, and exploring new ideas that help me grow my skills.
+        </p>
+
+        <div class="about-tags">
+            <span>Anime Lover</span>
+            <span>One Piece Fan</span>
+            <span>Demon Slayer Fan</span>
+            <span>Reader</span>
+            <span>Tech Enthusiast</span>
+            <span>Creative Developer</span>
+        </div>
+    </div>
+</section>
+
+<section class="naruto-feature-section reveal-up">
+    <div class="feature-card">
+        <div class="feature-icon">📚</div>
+        <h3>Reading</h3>
+        <p>I enjoy spending my spare time reading and exploring stories that inspire imagination and growth.</p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon">🎌</div>
+        <h3>Anime</h3>
+        <p>Anime is one of my favorite interests, especially series like One Piece and Demon Slayer.</p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon">💻</div>
+        <h3>Technology</h3>
+        <p>I love working on technology-related projects and turning creative ideas into interactive experiences.</p>
+    </div>
+</section>
 {% endblock %}

@@ -1,16 +1,34 @@
 {% extends 'base.html' %}
 
 {% block main %}
-<h1 class="page-header">Uploaded Images</h1>
+<section class="anime-hero">
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+        <h1 class="page-header anime-title">Shinobi Image Archive</h1>
+        <p class="anime-subtitle">
+            Enter the hidden gallery. Hover over each image to unleash its full form.
+        </p>
+    </div>
+</section>
 
 {% include 'flash_messages.html' %}
 
-<div class="image-grid">
-    {% for image in images %}
-        <div class="image-card">
-            <img src="{{ url_for('get_image', filename=image) }}" alt="Uploaded Image">
-            <p>{{ image }}</p>
-        </div>
-    {% endfor %}
-</div>
+<section class="gallery-shell">
+    <div class="image-grid">
+        {% for image in images %}
+            <article class="image-card anime-card">
+                <div class="image-frame">
+                    <img
+                        src="{{ url_for('get_image', filename=image) }}"
+                        alt="{{ image }}"
+                        class="gallery-image"
+                    >
+                </div>
+                <div class="image-meta">
+                    <p>{{ image }}</p>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+</section>
 {% endblock %}

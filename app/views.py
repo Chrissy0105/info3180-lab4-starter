@@ -21,7 +21,7 @@ def home():
 @app.route('/about/')
 def about():
     """Render the website's about page."""
-    return render_template('about.html', name="Mary Jane")
+    return render_template('about.html')
 
 
 @app.route('/upload', methods=['POST', 'GET'])
@@ -58,6 +58,14 @@ def login():
         flash('Invalid username or password.', 'danger')
 
     return render_template("login.html", form=form)
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You have been logged out.', 'success')
+    return redirect(url_for('home'))
 
 
 # user_loader callback. This callback is used to reload the user object from
@@ -97,10 +105,7 @@ def get_uploaded_images():
         if os.path.isfile(filepath):
             images.append((file, os.path.getmtime(filepath)))
 
-    # sort by newest first
     images.sort(key=lambda x: x[1], reverse=True)
-
-    # return just filenames
     return [image[0] for image in images]
 
 
